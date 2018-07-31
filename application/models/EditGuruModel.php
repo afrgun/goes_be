@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $result = $query->result();
         return $result;
     }
-
+    
     public function updatePosts($id, $data){
         $this->db->where('kd_guru', $id);
         $this->db->update('Guru', $data);

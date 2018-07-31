@@ -25,7 +25,7 @@
         $this->DaftarGuruModel->deletePosts($id);
         //$this->deletePosts();
         
-        $this->session->set_flashdata('success', "Data terhapus"); 
+        $this->session->set_flashdata('delete', "Data terhapus"); 
         $this->index();
     }
 

@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>daftar_murid" class="nav-link">
+                    <a href="<?php echo base_url(); ?>daftar_siswa" class="nav-link">
                     <i class="nav-icon fa fa-th"></i>
                     <p> Daftar Murid </p>
                     </a>

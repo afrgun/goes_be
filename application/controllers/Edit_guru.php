@@ -40,13 +40,20 @@
             'pendidikan' => $this->input->post('pendidikan'),
             'pass_guru' => $this->input->post('pass_guru')
         );
+
+
         $this->EditGuruModel->updatePosts($id, $data);
-            
-        //$this->session->set_flashdata('success', "Data tersimpan"); 
-
-        $this->index();
         
+        $this->index();
 
+        if($this->form_validation->run() == FALSE){
+            return false;
+        } else{
+            redirect('daftar_guru', 'refresh');
+            $this->load->view('daftar_guru');
+            return true;
+        }
+        
     }
 
     }    

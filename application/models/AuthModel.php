@@ -18,14 +18,15 @@
         }
 
         //mengecek data di db
-        public function login($kd_guru, $pass_guru){
-            $q = $this->db->select('*')->from('Guru')->where('kd_guru', $kd_guru)->get()->row();
+        public function login($kode, $password){
+            $q      = $this->db->select('*')->from('Guru')->where('kd_guru', $kode)->get()->row();
+            $siswa  = $this->db2->select('*')->from('data_siswa')->where('kd_siswa', $kode)->get()->row();
 
-            if($q == ""){
+            if($q == "" && $siswa == ""){
                 return array('status' => 204, 'message'=> 'User not found');
             } else {
                 $hashed_pass = $q->pass_guru;
-                $kd_guru     = $q->kd_guru;
+                $kode     = $q->kd_guru;
                 $nm_guru     = $q->nm_guru;
                 $tgl_lahir   = $q->tgl_lahir;
                 $stat        = $q->status;
@@ -33,7 +34,7 @@
                 $pendidikan  = $q->pendidikan;
 
                 //$passwordMD5 = substr( md5($pass_guru), 0, 32);
-                $passwordMD5 = substr( $pass_guru, 0, 32);
+                $passwordMD5 = substr( $password, 0, 32);
                 if (hash_equals($hashed_pass, $passwordMD5)){
                     //$last_login = date('Y-m-d H:i:s');
 
@@ -53,12 +54,26 @@
                         return array('status' => 500, 'message'=>'Internal server error');
                     } else {
                         $this->db->trans_commit();
-                        return array('status' => 200, 'message' =>'Successfully  login', 'kode' => $kd_guru, 'nama' => $nm_guru, 'ttl' => $tgl_lahir, 'stat' => $stat, 'pendidikan' => $pendidikan
+                        return array('status' => 200, 'message' =>'Successfully  login', 'kode' => $kode, 'nama' => $nm_guru, 'ttl' => $tgl_lahir, 'stat' => $stat, 'pendidikan' => $pendidikan
                         );
                     }
                 } else {
                     return array('status'=>204, 'message'=>'wrong password');
                 }
+            }
+        }
+
+        public function logout(){
+            $users_id   = $this->input->get_request_header('User-ID', true);
+            $token      = $this->input->get_request_header('Authorization', TRUE);
+
+            if($users_id == ""){
+                return array('status' => 204, 'message' => 'Headers ID is Null');
+            } /*elseif ($token == ""){
+                return array('status' => 204, 'message' => 'Headers Auth is Null');
+            }*/ else {
+                //$this->db->where('kd_guru', )
+                return array('status' => 200, 'message' => 'Successfully logout');
             }
         }
     }

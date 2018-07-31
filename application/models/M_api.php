@@ -17,6 +17,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 return $query[0];
             }
         }
+
+        public function getSiswa(){
+            $this->db2->from('data_siswa');
+            $query = $this->db2->get();
+            
+            return $query->result();
+        }
+
+        public function getSiswaById($where=array()){
+            $query = $this->db2->get_where('data_siswa', $where);
+            $query = $query->result_array();
+            if($query){
+                return $query[0];
+            }
+        }
     
     }
 ?>

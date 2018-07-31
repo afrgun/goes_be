@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <section class="content">
         <div class="row">
           <div class="col-12">
-          <?php if( $this->session->flashdata('success')) {?>
+          <?php if( $this->session->flashdata('delete')) {?>
               <div class="alert alert-danger alert-dismissible" style="margin: 30px">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h5><i class="icon fa fa-check"></i> Data terhapus</h5>
